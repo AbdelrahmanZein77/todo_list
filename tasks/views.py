@@ -3,8 +3,13 @@ from rest_framework import viewsets, filters
 from .models import Task
 from .serializers import TaskSerializer
 from django_filters.rest_framework import DjangoFilterBackend
+from rest_framework.authentication import TokenAuthentication
+from rest_framework.permissions import IsAuthenticated
 
 class TaskViewSet(viewsets.ModelViewSet):
+    authentication_classes = [TokenAuthentication]
+    permission_classes = [IsAuthenticated]
+
     queryset = Task.objects.all()
     serializer_class = TaskSerializer
 
